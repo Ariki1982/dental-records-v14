@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Dr. Abdulwahab Al-Areqi</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#C9A84C;--gl:#E8C96B;--gd:#9A7A30;
+  --bg:#080D18;--panel:#0F1825;--card:#162030;--card2:#1C2A3E;
+  --border:rgba(201,168,76,.2);--border2:rgba(255,255,255,.07);
+  --text:#E2DDD0;--muted:#6B7280;--muted2:#9CA3AF;
+  --green:#22C55E;--red:#EF4444;--blue:#3B82F6;
+  --r:12px;--r2:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overscroll-behavior:none}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);direction:rtl;font-size:14px;overflow-x:hidden}
+
+/* ─── HEADER ─── */
+header{
+  background:linear-gradient(180deg,#0a1220 0%,var(--panel) 100%);
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+/* gold shimmer across bottom of header */
+header::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent 0%,var(--gd) 20%,var(--gl) 50%,var(--gd) 80%,transparent 100%);
+  background-size:200% 100%;
+  animation:shim 4s linear infinite;
+}
+@keyframes shim{0%{background-position:200%}100%{background-position:-200%}}
+
+/* ── top row: logo | clock | buttons ── */
+.hdr{
+  max-width:1440px;margin:0 auto;
+  padding:10px 20px 8px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:16px;
+}
+
+/* LOGO */
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-icon{
+  width:38px;height:38px;
+  background:linear-gradient(135deg,var(--gd),var(--gl));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;
+  box-shadow:0 0 0 0 rgba(201,168,76,.5);
+  animation:pulse 3s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.4),0 2px 14px rgba(201,168,76,.25)}
+  50%{box-shadow:0 0 0 5px rgba(201,168,76,.0),0 2px 22px rgba(201,168,76,.55)}
+}
+.logo-text h1{font-size:14px;font-weight:900;color:var(--gl);letter-spacing:.6px;font-family:'Cairo',sans-serif;line-height:1.1}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;letter-spacing:.3px}
+
+/* CLOCK CENTER */
+.hdr-clock{text-align:center}
+.clock-row{display:inline-flex;align-items:center;gap:7px;justify-content:center}
+.clock-main{
+  font-family:'Cairo',sans-serif;font-size:28px;font-weight:900;
+  color:var(--gl);letter-spacing:4px;line-height:1;
+  text-shadow:0 0 20px rgba(201,168,76,.5);
+  font-variant-numeric:tabular-nums;
+}
+.clock-ampm{
+  font-size:11px;font-weight:800;
+  background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.08));
+  border:1px solid rgba(201,168,76,.35);
+  color:var(--gl);border-radius:5px;
+  padding:3px 7px;
+  font-family:'Cairo',sans-serif;
+  letter-spacing:1px;
+  align-self:center;
+}
+.dates{display:flex;justify-content:center;gap:16px;margin-top:4px}
+.dates span{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.dates b{color:var(--g);font-weight:600}
+
+/* BUTTONS */
+.hdr-btns{display:flex;gap:8px;flex-shrink:0;justify-content:flex-start}
+
+/* ─── BUTTONS ─── */
+.btn{padding:8px 16px;border-radius:20px;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:all .18s;white-space:nowrap}
+.btn-gold{background:linear-gradient(135deg,var(--gd),var(--g));color:#080D18;box-shadow:0 2px 12px rgba(201,168,76,.3)}
+.btn-gold:hover{background:linear-gradient(135deg,var(--g),var(--gl));transform:translateY(-1px);box-shadow:0 4px 18px rgba(201,168,76,.45)}
+.btn-ghost{background:rgba(255,255,255,.05);border:1px solid var(--border2);color:var(--muted2)}
+.btn-ghost:hover{background:rgba(201,168,76,.1);border-color:var(--border);color:var(--gl)}
+.btn-danger{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5}
+.btn-danger:hover{background:rgba(239,68,68,.2)}
+.btn-sm{padding:6px 12px;font-size:11px}
+
+/* ─── MAIN ─── */
+main{max-width:1440px;margin:0 auto;padding:20px}
+
+/* ─── STATS ─── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;border-top:2px solid transparent;transition:all .2s}
+.stat:nth-child(1){border-top-color:var(--g)}
+.stat:nth-child(2){border-top-color:var(--blue)}
+.stat:nth-child(3){border-top-color:var(--green)}
+.stat:nth-child(4){border-top-color:var(--red)}
+.stat:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.stat-ico{font-size:24px;flex-shrink:0}
+.stat-info label{font-size:10px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.4px}
+.stat-val{font-size:20px;font-weight:700;color:var(--gl);font-family:'Cairo',sans-serif;line-height:1.2}
+
+/* ─── TOOLBAR ─── */
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.search{flex:1;min-width:180px;position:relative}
+.search input{width:100%;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:9px 16px 9px 38px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;transition:all .2s}
+.search input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(201,168,76,.12);background:var(--card2)}
+.search::before{content:'🔍';position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none}
+
+/* ─── TABLE ─── */
+.tbl-wrap{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.tbl-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border2)}
+.tbl-head h2{font-size:14px;font-weight:700;color:var(--gl)}
+#recCount{font-size:12px;color:var(--muted)}
+.tbl-scroll{overflow-x:auto;max-height:500px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;min-width:1100px;font-size:12px}
+thead th{background:rgba(201,168,76,.06);padding:10px 12px;text-align:right;color:var(--g);font-weight:700;font-size:11px;border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:2;white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer;transition:background .12s}
+tbody tr:hover{background:rgba(201,168,76,.07)}
+tbody td{padding:10px 12px;vertical-align:middle;white-space:nowrap;color:var(--text)}
+.bdg{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.bdg-green{background:rgba(34,197,94,.15);color:#4ADE80;border:1px solid rgba(34,197,94,.25)}
+.bdg-red{background:rgba(239,68,68,.12);color:#FCA5A5;border:1px solid rgba(239,68,68,.2);animation:blink 2.5s ease-in-out infinite}
+.bdg-blue{background:rgba(59,130,246,.15);color:#93C5FD;border:1px solid rgba(59,130,246,.25)}
+.bdg-gold{background:rgba(201,168,76,.15);color:var(--gl);border:1px solid var(--border)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.6}}
+.row-act{display:flex;gap:5px}
+.ico-btn{background:none;border:1px solid transparent;border-radius:6px;padding:4px 7px;cursor:pointer;font-size:13px;color:var(--muted);transition:all .15s}
+.ico-btn:hover{border-color:var(--border2);background:rgba(255,255,255,.05);color:var(--text)}
+.file-ico{display:inline-flex;gap:3px}
+.file-ico span{background:rgba(201,168,76,.12);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:10px;color:var(--g);cursor:pointer}
+.file-ico span:hover{background:rgba(201,168,76,.25)}
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty div{font-size:44px;margin-bottom:10px}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--gd);border-radius:3px}
+
+/* ─── MODAL ─── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:linear-gradient(160deg,#111c2e,#0e1520);border:1px solid var(--border);border-radius:18px;width:100%;max-width:860px;max-height:94vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.9);animation:mIn .22s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.m-hdr{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.04);position:sticky;top:0;z-index:5}
+.m-hdr h3{font-size:16px;font-weight:800;color:var(--gl);display:flex;align-items:center;gap:8px}
+.m-close{background:rgba(255,255,255,.06);border:1px solid var(--border2);color:var(--muted2);border-radius:7px;padding:5px 11px;cursor:pointer;font-size:16px;transition:all .15s}
+.m-close:hover{background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.4);color:#FCA5A5}
+.m-body{padding:24px}
+.m-foot{display:flex;gap:10px;justify-content:flex-end;padding:16px 24px;border-top:1px solid var(--border);background:rgba(0,0,0,.15)}
+
+/* ─── FORM ─── */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:11px;color:var(--g);font-weight:700;letter-spacing:.3px}
+.fg input,.fg textarea,.fg select{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:var(--r2);padding:10px 13px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;transition:all .2s;width:100%}
+.fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--g);background:rgba(201,168,76,.04);box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+.fg textarea{resize:vertical;min-height:72px}
+.fg select option{background:#111827}
+.divider{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin:4px 0}
+.divider span{font-size:10px;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent)}
+.amount-wrap{position:relative}
+.amount-wrap input{padding-left:42px}
+.currency{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--g);font-weight:700;font-size:12px;pointer-events:none}
+.rem-box{background:rgba(201,168,76,.08);border:1.5px solid var(--border);border-radius:var(--r2);padding:10px 13px;font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;color:var(--gl)}
+
+/* ─── FILE ZONE ─── */
+.fzone{border:2px dashed var(--border);border-radius:var(--r);padding:20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.fzone:hover,.fzone.drag{border-color:var(--g);background:rgba(201,168,76,.05)}
+.fzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.fzone-ico{font-size:32px;margin-bottom:6px}
+.fzone p{font-size:12px;color:var(--muted)}
+.fzone strong{color:var(--g)}
+.fprev{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fchip{display:flex;align-items:center;gap:6px;background:rgba(201,168,76,.08);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:11px;max-width:180px}
+.fchip .fname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.fchip button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;line-height:1;padding:0 2px;flex-shrink:0}
+.fchip button:hover{color:#FCA5A5}
+.fprev-img-wrap{position:relative;width:60px;height:60px;flex-shrink:0}
+.fprev-img{width:60px;height:60px;object-fit:cover;border-radius:7px;border:1px solid var(--border);cursor:pointer;display:block}
+.fprev-del{position:absolute;top:-5px;left:-5px;width:18px;height:18px;background:#EF4444;border:none;border-radius:50%;color:#fff;font-size:12px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 5px rgba(0,0,0,.5);transition:all .15s;padding:0}
+.fprev-del:hover{background:#DC2626;transform:scale(1.2)}
+
+/* ─── DETAIL MODAL ─── */
+.dsec{margin-bottom:20px}
+.dsec h4{font-size:10px;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dfield label{font-size:10px;color:var(--muted);display:block;margin-bottom:2px}
+.dfield .dval{font-size:13px;font-weight:500;color:var(--text)}
+.dfield.full{grid-column:1/-1}
+.gal{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.gal-img{width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid var(--border);cursor:pointer;transition:all .15s}
+.gal-img:hover{border-color:var(--g);transform:scale(1.05)}
+.gal-file{display:flex;flex-direction:column;align-items:center;gap:3px;background:rgba(201,168,76,.08);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:11px;color:var(--g);transition:all .15s;text-align:center;max-width:90px}
+.gal-file:hover{border-color:var(--g);background:rgba(201,168,76,.15)}
+.gal-file .fic{font-size:24px}
+
+/* ─── LIGHTBOX ─── */
+.lbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:300;align-items:center;justify-content:center}
+.lbox.open{display:flex}
+.lbox img{max-width:92vw;max-height:90vh;border-radius:10px;box-shadow:0 20px 80px rgba(0,0,0,.8)}
+.lbox-close{position:fixed;top:16px;right:16px;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:22px;padding:6px 13px;border-radius:8px;cursor:pointer;z-index:301}
+
+/* ─── IO MODAL ─── */
+.io-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.io-card{background:rgba(255,255,255,.03);border:1.5px solid var(--border2);border-radius:var(--r);padding:20px;text-align:center;transition:border-color .2s}
+.io-card:hover{border-color:var(--border)}
+.io-card .ic{font-size:36px;margin-bottom:10px}
+.io-card h4{font-size:13px;font-weight:700;color:var(--gl);margin-bottom:6px}
+.io-card p{font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.io-card .btn{width:100%;justify-content:center}
+.io-status{display:none;border-radius:8px;padding:10px 14px;font-size:12px;margin-top:14px;text-align:right}
+.io-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:var(--r);padding:16px;display:flex;align-items:center;gap:12px;margin-top:14px}
+.io-warn .ic2{font-size:24px}
+.io-warn h5{font-size:12px;color:#FCA5A5;margin-bottom:4px}
+.io-warn p{font-size:11px;color:var(--muted)}
+
+/* ─── RESPONSIVE ─── */
+
+/* tablet */
+@media(max-width:900px){
+  .stats{grid-template-columns:1fr 1fr}
+  .io-grid{grid-template-columns:1fr 1fr}
+}
+
+/* mobile */
+@media(max-width:600px){
+  /* header mobile: stack into 2 rows */
+  .hdr{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto auto;
+    padding:8px 14px 6px;
+    gap:6px;
+  }
+  .logo{grid-column:1;grid-row:1;align-self:center}
+  .hdr-btns{grid-column:2;grid-row:1;justify-content:flex-start}
+  .hdr-clock{grid-column:1/-1;grid-row:2;border-top:1px solid rgba(201,168,76,.12);padding-top:6px}
+  .clock-main{font-size:22px;letter-spacing:2px}
+  .logo-text h1{font-size:12px}
+  .logo-text p{display:none}
+  .dates span{font-size:10px}
+  .hdr-btns{gap:6px}
+  .btn{padding:7px 11px;font-size:11px}
+
+  /* main padding */
+  main{padding:12px}
+
+  /* stats: 2-col compact */
+  .stats{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+  .stat{padding:10px 12px;gap:8px}
+  .stat-ico{font-size:20px}
+  .stat-val{font-size:16px}
+  .stat-info label{font-size:9px}
+
+  /* toolbar */
+  .toolbar{gap:6px;margin-bottom:12px}
+  .search input{font-size:12px;padding:8px 14px 8px 34px}
+
+  /* table: short max-height, smaller font */
+  .tbl-scroll{max-height:380px}
+  table{font-size:11px}
+  thead th{padding:8px 10px;font-size:10px}
+  tbody td{padding:8px 10px}
+
+  /* modals full-screen */
+  .overlay{padding:0}
+  .modal{border-radius:0;max-height:100vh;height:100%;border:none}
+  .m-hdr{padding:14px 16px}
+  .m-body{padding:16px}
+  .m-foot{padding:12px 16px}
+
+  /* form */
+  .fgrid{grid-template-columns:1fr;gap:12px}
+  .fg input,.fg textarea,.fg select{font-size:14px;padding:11px 13px} /* bigger touch targets */
+  .fg textarea{min-height:64px}
+
+  /* detail */
+  .dgrid{grid-template-columns:1fr}
+  .gal-img{width:70px;height:70px}
+
+  /* io */
+  .io-grid{grid-template-columns:1fr}
+  .io-card{padding:14px}
+
+  /* amounts */
+  .amount-wrap input{font-size:14px}
+}
+
+/* very small (SE, mini) */
+@media(max-width:375px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat-val{font-size:14px}
+  .clock-main{font-size:18px}
+}
+
+/* ─── BODY BG PATTERN ─── */
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(201,168,76,.045) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0}
+header,main{position:relative;z-index:1}
+main{animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-icon">🦷</div>
+      <div class="logo-text">
+        <h1>Dr. Abdulwahab Al-Areqi</h1>
+        <p>Dental Clinic</p>
+      </div>
+    </div>
+
+    <!-- Clock & Dates — centre -->
+    <div class="hdr-clock">
+      <div class="clock-row">
+        <span class="clock-main" id="clk">12:00:00</span>
+        <span class="clock-ampm" id="ampm">AM</span>
+      </div>
+      <div class="dates">
+        <span>🗓 <b id="gdate">–</b></span>
+        <span>📅 <b id="hdate">–</b></span>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="hdr-btns">
+      <button class="btn btn-ghost" onclick="openIO()">📦 بيانات</button>
+      <button class="btn btn-gold" onclick="openAdd()">➕ مريض</button>
+    </div>
+
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+  <div class="stats">
+    <div class="stat"><div class="stat-ico">👥</div><div class="stat-info"><label>المرضى</label><div class="stat-val" id="s1">0</div></div></div>
+    <div class="stat"><div class="stat-ico">💰</div><div class="stat-info"><label>إجمالي المبالغ</label><div class="stat-val" id="s2">0 ر.س</div></div></div>
+    <div class="stat"><div class="stat-ico">✅</div><div class="stat-info"><label>المحصّل</label><div class="stat-val" id="s3">0 ر.س</div></div></div>
+    <div class="stat"><div class="stat-ico">⏳</div><div class="stat-info"><label>المتبقي</label><div class="stat-val" id="s4">0 ر.س</div></div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><input id="q" type="text" placeholder="ابحث: اسم، ملف، خدمة..." oninput="render()"></div>
+    <button class="btn btn-ghost btn-sm" onclick="exportCSV()">📄 CSV</button>
+    <button class="btn btn-ghost btn-sm" onclick="exportJSON()">💾 JSON</button>
+    <button class="btn btn-ghost btn-sm" onclick="doPrint()">🖨️ طباعة</button>
+  </div>
+
+  <div class="tbl-wrap">
+    <div class="tbl-head">
+      <h2>📋 سجلات المرضى</h2>
+      <span id="recCount">—</span>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>التاريخ والوقت</th><th>المريض</th><th>العمر</th>
+            <th>رقم الملف</th><th>الخدمة</th><th>العلاجات المستخدمة</th><th>الملفات</th>
+            <th>الخدمات القادمة</th><th>الإجمالي</th><th>المدفوع</th><th>المتبقي</th>
+            <th>الزيارة القادمة</th><th>ملاحظات</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div id="empty" class="empty" style="display:none"><div>🦷</div><p>لا توجد سجلات. أضف أول مريض.</p></div>
+  </div>
+</main>
+
+<!-- ══ ADD/EDIT MODAL ══ -->
+<div class="overlay" id="mRec">
+  <div class="modal">
+    <div class="m-hdr">
+      <h3 id="mTitle">➕ إضافة مريض</h3>
+      <button class="m-close" onclick="closeM('mRec')">✕</button>
+    </div>
+    <div class="m-body">
+      <div class="fgrid">
+
+        <!-- Basic -->
+        <div class="divider full"><span>البيانات الأساسية</span></div>
+        <div class="fg"><label>📅 التاريخ والوقت</label><input type="datetime-local" id="f_dt"></div>
+        <div class="fg"><label>👤 اسم المريض</label><input type="text" id="f_name" placeholder="الاسم الكامل"></div>
+        <div class="fg"><label>🎂 العمر</label><input type="number" id="f_age" placeholder="سنة" min="1" max="120"></div>
+        <div class="fg"><label>📁 رقم الملف</label><input type="text" id="f_file" placeholder="مثال: 2024-001"></div>
+
+        <!-- Service -->
+        <div class="divider full"><span>بيانات الخدمة</span></div>
+        <div class="fg full"><label>🦷 الخدمة</label>
+          <select id="f_svc">
+            <option value="">-- اختر الخدمة --</option>
+            <option>حشو أسنان</option><option>خلع سن</option><option>تنظيف وتلميع</option>
+            <option>تقويم أسنان</option><option>تركيب طقم أسنان</option><option>زراعة أسنان</option>
+            <option>علاج عصب</option><option>تبييض أسنان</option><option>تركيب تاج / جسر</option>
+            <option>فحص دوري</option><option>أشعة سينية</option><option>أخرى</option>
+          </select>
+        </div>
+        <div class="fg full"><label>📋 وصف الحالة / الخدمة</label><textarea id="f_desc" placeholder="وصف تفصيلي للحالة..."></textarea></div>
+
+        <!-- Files -->
+        <div class="divider full"><span>📎 الصور والملفات</span></div>
+        <div class="fg full">
+          <div class="fzone" id="fzone">
+            <input type="file" id="f_files" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx" onchange="handleFiles(this.files)">
+            <div class="fzone-ico">📁</div>
+            <p><strong>انقر أو اسحب الملفات هنا</strong></p>
+            <p>صور • PDF • Word • Excel — الصور تُضغط تلقائياً</p>
+          </div>
+          <div class="fprev" id="fprev"></div>
+        </div>
+
+        <!-- Treatments -->
+        <div class="divider full"><span>💊 العلاجات المستخدمة</span></div>
+        <div class="fg full"><label>العلاجات / المواد / الأدوية المستخدمة</label><textarea id="f_treat" placeholder="مثال: أموكسيسيلين 500mg، بنج ليدوكائين، كمبوزيت A2..."></textarea></div>
+
+        <!-- Upcoming -->
+        <div class="fg full"><label>📝 الخدمات القادمة</label><input type="text" id="f_next" placeholder="الخدمات المخططة في الزيارة القادمة"></div>
+
+        <!-- Finance -->
+        <div class="divider full"><span>💰 البيانات المالية</span></div>
+        <div class="fg"><label>💵 الإجمالي</label><div class="amount-wrap"><span class="currency">ر.س</span><input type="number" id="f_tot" placeholder="0.00" min="0" step="0.01" oninput="calcRem()"></div></div>
+        <div class="fg"><label>✅ المدفوع</label><div class="amount-wrap"><span class="currency">ر.س</span><input type="number" id="f_paid" placeholder="0.00" min="0" step="0.01" oninput="calcRem()"></div></div>
+        <div class="fg"><label>⏳ المتبقي</label><div class="rem-box" id="f_rem">0.00 ر.س</div></div>
+
+        <!-- Next visit -->
+        <div class="divider full"><span>📆 الزيارة القادمة</span></div>
+        <div class="fg"><label>📅 التاريخ</label><input type="date" id="f_nd"></div>
+        <div class="fg"><label>⏰ الوقت</label><input type="time" id="f_nt"></div>
+        <div class="fg full"><label>📌 ملاحظات</label><textarea id="f_notes" placeholder="ملاحظات إضافية..."></textarea></div>
+
+      </div>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-ghost" onclick="closeM('mRec')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveRec()">💾 حفظ السجل</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DETAIL MODAL ══ -->
+<div class="overlay" id="mDet">
+  <div class="modal">
+    <div class="m-hdr">
+      <h3>👁 تفاصيل السجل</h3>
+      <button class="m-close" onclick="closeM('mDet')">✕</button>
+    </div>
+    <div class="m-body" id="detBody"></div>
+    <div class="m-foot">
+      <button class="btn btn-ghost" onclick="closeM('mDet')">إغلاق</button>
+      <button class="btn btn-gold" id="detEdit">✏️ تعديل</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ IO MODAL ══ -->
+<div class="overlay" id="mIO">
+  <div class="modal" style="max-width:640px">
+    <div class="m-hdr">
+      <h3>📦 استيراد وتصدير البيانات</h3>
+      <button class="m-close" onclick="closeM('mIO')">✕</button>
+    </div>
+    <div class="m-body">
+      <div class="io-grid">
+
+        <div class="io-card">
+          <div class="ic">⬆️</div>
+          <h4>تصدير JSON كامل</h4>
+          <p>جميع السجلات مع الصور والملفات — مثالي للنسخ الاحتياطي الكامل</p>
+          <button class="btn btn-gold" onclick="exportJSON()">📥 تصدير JSON</button>
+        </div>
+
+        <div class="io-card">
+          <div class="ic">⬇️</div>
+          <h4>استيراد JSON</h4>
+          <p>استيراد نسخة احتياطية سابقة — اختر الإضافة أو الاستبدال</p>
+          <label class="btn btn-ghost" style="cursor:pointer;justify-content:center">
+            📂 اختر ملف
+            <input type="file" accept=".json" style="display:none" onchange="importJSON(this)">
+          </label>
+        </div>
+
+        <div class="io-card">
+          <div class="ic">📊</div>
+          <h4>تصدير CSV</h4>
+          <p>جدول البيانات النصية فقط — يفتح في Excel و Numbers</p>
+          <button class="btn btn-ghost" onclick="exportCSV();closeM('mIO')">📄 تصدير CSV</button>
+        </div>
+
+        <div class="io-card">
+          <div class="ic">🖨️</div>
+          <h4>طباعة / PDF</h4>
+          <p>تقرير منظم بجميع البيانات والصور — يفتح في نافذة جديدة</p>
+          <button class="btn btn-ghost" onclick="doPrint();closeM('mIO')">🖨️ طباعة</button>
+        </div>
+
+      </div>
+
+      <div class="io-status" id="ioStatus"></div>
+
+      <div class="io-warn">
+        <span class="ic2">🗑️</span>
+        <div>
+          <h5>مسح جميع البيانات</h5>
+          <p>حذف نهائي لجميع السجلات. يُنصح بالتصدير أولاً.</p>
+          <button class="btn btn-danger btn-sm" style="margin-top:8px" onclick="clearAll()">⚠️ مسح الكل</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lbox" id="lbox" onclick="closeLB()">
+  <button class="lbox-close">✕</button>
+  <img id="lboxImg" src="" alt="">
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════
+let recs = [];
+
+function load() {
+  try { const d = localStorage.getItem('dr_areqi_v3'); if(d) recs = JSON.parse(d); } catch(e){ recs=[]; }
+}
+function save() {
+  try { localStorage.setItem('dr_areqi_v3', JSON.stringify(recs)); }
+  catch(e) { alert('⚠️ تجاوز حجم التخزين. صدّر بياناتك الآن.'); }
+}
+
+// ═══════════════════════════════════════════
+// CLOCK
+// ═══════════════════════════════════════════
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick() {
+  const n = new Date();
+  let h = n.getHours(), ap = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  document.getElementById('clk').textContent = `${pad(h)}:${pad(n.getMinutes())}:${pad(n.getSeconds())}`;
+  document.getElementById('ampm').textContent = ap;
+  const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const mo = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  document.getElementById('gdate').textContent = `${days[n.getDay()]} ${n.getDate()} ${mo[n.getMonth()]} ${n.getFullYear()}`;
+  try {
+    document.getElementById('hdate').textContent = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}).format(n);
+  } catch(e){}
+}
+setInterval(tick,1000); tick();
+
+// ═══════════════════════════════════════════
+// IMAGE COMPRESSION
+// ═══════════════════════════════════════════
+function compressImage(file, maxW=800, quality=0.75) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(c.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ═══════════════════════════════════════════
+// FILES
+// ═══════════════════════════════════════════
+let curFiles = [];
+
+async function handleFiles(list) {
+  for (const f of list) {
+    if (f.type.startsWith('image/')) {
+      const compressed = await compressImage(f);
+      curFiles.push({ name: f.name, type: 'image/jpeg', data: compressed });
+    } else {
+      const reader = new FileReader();
+      reader.onload = e => { curFiles.push({ name: f.name, type: f.type, data: e.target.result }); renderFPrev(); };
+      reader.readAsDataURL(f); continue;
+    }
+    renderFPrev();
+  }
+}
+
+function renderFPrev() {
+  const con = document.getElementById('fprev');
+  con.innerHTML = '';
+  curFiles.forEach((f,i) => {
+    if (f.type.startsWith('image/')) {
+      const wrap = document.createElement('div');
+      wrap.className = 'fprev-img-wrap';
+      const img = document.createElement('img');
+      img.src = f.data; img.className = 'fprev-img'; img.title = f.name;
+      img.onclick = () => openLB(f.data);
+      const del = document.createElement('button');
+      del.className = 'fprev-del';
+      del.innerHTML = '×';
+      del.title = 'حذف الصورة';
+      del.onclick = (e) => { e.stopPropagation(); rmFile(i); };
+      wrap.appendChild(img);
+      wrap.appendChild(del);
+      con.appendChild(wrap);
+    } else {
+      const div = document.createElement('div');
+      div.className = 'fchip';
+      div.innerHTML = `<span>${fIcon(f.type)}</span><span class="fname" title="${f.name}">${f.name}</span><button onclick="rmFile(${i})">×</button>`;
+      con.appendChild(div);
+    }
+  });
+}
+
+function rmFile(i) { curFiles.splice(i,1); renderFPrev(); }
+function fIcon(t) {
+  if(t.includes('pdf')) return '📄';
+  if(t.includes('word')||t.includes('document')) return '📝';
+  if(t.includes('sheet')||t.includes('excel')) return '📊';
+  return '📎';
+}
+
+const fz = document.getElementById('fzone');
+fz.addEventListener('dragover', e => { e.preventDefault(); fz.classList.add('drag'); });
+fz.addEventListener('dragleave', () => fz.classList.remove('drag'));
+fz.addEventListener('drop', e => { e.preventDefault(); fz.classList.remove('drag'); handleFiles(e.dataTransfer.files); });
+
+// ═══════════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════════
+function openM(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeM(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', e => { if(e.target === o) closeM(o.id); });
+});
+
+// ═══════════════════════════════════════════
+// ADD / EDIT
+// ═══════════════════════════════════════════
+let editId = null;
+
+function openAdd(id=null) {
+  editId = id; curFiles = [];
+  const fields = ['dt','name','age','file','svc','desc','treat','next','tot','paid','nd','nt','notes'];
+  fields.forEach(f => { const el = document.getElementById('f_'+f); if(el) el.value=''; });
+  document.getElementById('f_rem').textContent = '0.00 ر.س';
+  document.getElementById('fprev').innerHTML = '';
+  document.getElementById('mTitle').textContent = id ? '✏️ تعديل سجل' : '➕ إضافة مريض';
+
+  if (id !== null) {
+    const r = recs.find(x => x.id === id);
+    if (r) {
+      document.getElementById('f_dt').value = r.dt||'';
+      document.getElementById('f_name').value = r.name||'';
+      document.getElementById('f_age').value = r.age||'';
+      document.getElementById('f_file').value = r.fileno||'';
+      document.getElementById('f_svc').value = r.svc||'';
+      document.getElementById('f_desc').value = r.desc||'';
+      document.getElementById('f_treat').value = r.treat||'';
+      document.getElementById('f_next').value = r.nextSvc||'';
+      document.getElementById('f_tot').value = r.total||'';
+      document.getElementById('f_paid').value = r.paid||'';
+      document.getElementById('f_nd').value = r.nd||'';
+      document.getElementById('f_nt').value = r.nt||'';
+      document.getElementById('f_notes').value = r.notes||'';
+      curFiles = r.files ? [...r.files] : [];
+      calcRem(); renderFPrev();
+    }
+  } else {
+    const now = new Date();
+    document.getElementById('f_dt').value = new Date(now.getTime() - now.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  }
+  openM('mRec');
+}
+
+function calcRem() {
+  const t = parseFloat(document.getElementById('f_tot').value)||0;
+  const p = parseFloat(document.getElementById('f_paid').value)||0;
+  document.getElementById('f_rem').textContent = (t-p).toFixed(2) + ' ر.س';
+}
+
+function saveRec() {
+  const name = document.getElementById('f_name').value.trim();
+  if (!name) { alert('⚠️ أدخل اسم المريض'); return; }
+  const tot = parseFloat(document.getElementById('f_tot').value)||0;
+  const paid = parseFloat(document.getElementById('f_paid').value)||0;
+  const rec = {
+    id: editId !== null ? editId : Date.now(),
+    dt: document.getElementById('f_dt').value,
+    name,
+    age: document.getElementById('f_age').value,
+    fileno: document.getElementById('f_file').value,
+    svc: document.getElementById('f_svc').value,
+    desc: document.getElementById('f_desc').value,
+    treat: document.getElementById('f_treat').value,
+    nextSvc: document.getElementById('f_next').value,
+    total: tot, paid, rem: +(tot-paid).toFixed(2),
+    nd: document.getElementById('f_nd').value,
+    nt: document.getElementById('f_nt').value,
+    notes: document.getElementById('f_notes').value,
+    files: [...curFiles]
+  };
+  if (editId !== null) {
+    const i = recs.findIndex(x => x.id === editId);
+    if (i !== -1) recs[i] = rec;
+  } else { recs.push(rec); }
+  save(); render(); stats(); closeM('mRec');
+}
+
+function delRec(id) {
+  if (!confirm('حذف هذا السجل نهائياً؟')) return;
+  recs = recs.filter(r => r.id !== id);
+  save(); render(); stats();
+}
+
+// ═══════════════════════════════════════════
+// RENDER TABLE
+// ═══════════════════════════════════════════
+function render() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  let list = recs;
+  if (q) list = recs.filter(r =>
+    (r.name||'').toLowerCase().includes(q) ||
+    (r.fileno||'').toLowerCase().includes(q) ||
+    (r.svc||'').toLowerCase().includes(q) ||
+    (r.treat||'').toLowerCase().includes(q)
+  );
+
+  const tb = document.getElementById('tbody');
+  const em = document.getElementById('empty');
+  document.getElementById('recCount').textContent = list.length + ' سجل';
+  tb.innerHTML = '';
+  em.style.display = list.length === 0 ? 'block' : 'none';
+
+  list.forEach((r, i) => {
+    const rem = parseFloat(r.rem)||0;
+    const remHtml = rem <= 0
+      ? `<span class="bdg bdg-green">مسدّد</span>`
+      : `<span class="bdg bdg-red">${rem} ر.س</span>`;
+
+    const filesHtml = (r.files&&r.files.length)
+      ? `<div class="file-ico">${r.files.map((f,fi) =>
+          `<span onclick="event.stopPropagation();vFile(${r.id},${fi})">${fIcon(f.type)}</span>`
+        ).join('')}</div>`
+      : '<span style="color:var(--muted);font-size:11px">—</span>';
+
+    const tr = document.createElement('tr');
+    tr.onclick = () => openDet(r.id);
+    tr.innerHTML = `
+      <td style="color:var(--muted);font-size:11px">${i+1}</td>
+      <td>${(r.dt||'').replace('T',' ')||'—'}</td>
+      <td><strong style="color:var(--gl)">${r.name}</strong></td>
+      <td>${r.age||'—'}</td>
+      <td><span class="bdg bdg-blue">${r.fileno||'—'}</span></td>
+      <td><span class="bdg bdg-gold">${r.svc||'—'}</span></td>
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis" title="${r.treat||''}">${r.treat||'—'}</td>
+      <td>${filesHtml}</td>
+      <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis">${r.nextSvc||'—'}</td>
+      <td style="color:var(--g);font-weight:700">${r.total||0} ر.س</td>
+      <td style="color:var(--green)">${r.paid||0} ر.س</td>
+      <td>${remHtml}</td>
+      <td>${r.nd||'—'}${r.nt?' '+r.nt:''}</td>
+      <td style="max-width:110px;overflow:hidden;text-overflow:ellipsis" title="${r.notes||''}">${r.notes||'—'}</td>
+      <td><div class="row-act" onclick="event.stopPropagation()">
+        <button class="ico-btn" onclick="openAdd(${r.id})" title="تعديل">✏️</button>
+        <button class="ico-btn" onclick="delRec(${r.id})" title="حذف">🗑️</button>
+      </div></td>`;
+    tb.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════
+function stats() {
+  const t = recs.reduce((s,r)=>s+(parseFloat(r.total)||0),0);
+  const p = recs.reduce((s,r)=>s+(parseFloat(r.paid)||0),0);
+  const rm = recs.reduce((s,r)=>s+(parseFloat(r.rem)||0),0);
+  document.getElementById('s1').textContent = recs.length;
+  document.getElementById('s2').textContent = t.toFixed(0)+' ر.س';
+  document.getElementById('s3').textContent = p.toFixed(0)+' ر.س';
+  document.getElementById('s4').textContent = rm.toFixed(0)+' ر.س';
+}
+
+// ═══════════════════════════════════════════
+// DETAIL
+// ═══════════════════════════════════════════
+function openDet(id) {
+  const r = recs.find(x=>x.id===id);
+  if (!r) return;
+  const rem = parseFloat(r.rem)||0;
+  const rc = rem<=0?'var(--green)':'var(--red)';
+
+  const imgs = (r.files||[]).filter(f=>f.type&&f.type.startsWith('image/'));
+  const docs = (r.files||[]).filter(f=>f.type&&!f.type.startsWith('image/'));
+  let filesHtml = '<p style="color:var(--muted);font-size:12px">لا توجد ملفات</p>';
+  if (r.files&&r.files.length) {
+    filesHtml = `<div class="gal">
+      ${imgs.map(f=>`<img src="${f.data}" class="gal-img" title="${f.name}" onclick="openLB('${f.data}')">`).join('')}
+      ${docs.map((f,i)=>`<div class="gal-file" onclick="dlFile(${id},${imgs.length+i})"><span class="fic">${fIcon(f.type)}</span><span>${f.name.substring(0,12)}${f.name.length>12?'…':''}</span></div>`).join('')}
+    </div>`;
+  }
+
+  document.getElementById('detBody').innerHTML = `
+    <div class="dsec"><h4>البيانات الأساسية</h4>
+      <div class="dgrid">
+        <div class="dfield"><label>التاريخ والوقت</label><div class="dval">${(r.dt||'—').replace('T',' ')}</div></div>
+        <div class="dfield"><label>اسم المريض</label><div class="dval" style="color:var(--gl);font-size:15px;font-weight:700">${r.name}</div></div>
+        <div class="dfield"><label>العمر</label><div class="dval">${r.age||'—'} سنة</div></div>
+        <div class="dfield"><label>رقم الملف</label><div class="dval">${r.fileno||'—'}</div></div>
+      </div>
+    </div>
+    <div class="dsec"><h4>الخدمة والعلاج</h4>
+      <div class="dgrid">
+        <div class="dfield"><label>الخدمة</label><div class="dval">${r.svc||'—'}</div></div>
+        <div class="dfield"><label>الخدمات القادمة</label><div class="dval">${r.nextSvc||'—'}</div></div>
+        <div class="dfield full"><label>وصف الحالة</label><div class="dval">${r.desc||'—'}</div></div>
+        <div class="dfield full"><label>💊 العلاجات المستخدمة</label><div class="dval" style="color:var(--gl)">${r.treat||'—'}</div></div>
+      </div>
+    </div>
+    <div class="dsec"><h4>الصور والملفات (${(r.files||[]).length})</h4>${filesHtml}</div>
+    <div class="dsec"><h4>البيانات المالية</h4>
+      <div class="dgrid">
+        <div class="dfield"><label>الإجمالي</label><div class="dval" style="color:var(--gl);font-size:17px">${r.total||0} ر.س</div></div>
+        <div class="dfield"><label>المدفوع</label><div class="dval" style="color:var(--green);font-size:17px">${r.paid||0} ر.س</div></div>
+        <div class="dfield"><label>المتبقي</label><div class="dval" style="color:${rc};font-size:17px">${rem.toFixed(2)} ر.س</div></div>
+        <div class="dfield"><label>الزيارة القادمة</label><div class="dval">${r.nd||'—'}${r.nt?' '+r.nt:''}</div></div>
+      </div>
+    </div>
+    ${r.notes?`<div class="dsec"><h4>ملاحظات</h4><div class="dval">${r.notes}</div></div>`:''}
+  `;
+  document.getElementById('detEdit').onclick = () => { closeM('mDet'); openAdd(id); };
+  openM('mDet');
+}
+
+function vFile(rid, fi) {
+  const r = recs.find(x=>x.id==rid);
+  if (!r||!r.files[fi]) return;
+  const f = r.files[fi];
+  if (f.type.startsWith('image/')) openLB(f.data);
+  else dlFile(rid, fi);
+}
+
+function dlFile(rid, fi) {
+  const r = recs.find(x=>x.id==rid);
+  if (!r||!r.files[fi]) return;
+  const f = r.files[fi];
+  iosDL(f.name, f.type, null, f.data);
+}
+
+// ═══════════════════════════════════════════
+// LIGHTBOX
+// ═══════════════════════════════════════════
+function openLB(src) { document.getElementById('lboxImg').src=src; document.getElementById('lbox').classList.add('open'); }
+function closeLB() { document.getElementById('lbox').classList.remove('open'); }
+
+// ═══════════════════════════════════════════
+// iOS-SAFE DOWNLOAD (stays inside PWA)
+// ═══════════════════════════════════════════
+function iosDL(filename, mime, textContent, dataURI) {
+  // If textContent provided, build data URI from it
+  const uri = dataURI || ('data:'+mime+';base64,'+btoa(unescape(encodeURIComponent(textContent))));
+  const a = document.createElement('a');
+  a.href = uri;
+  a.download = filename;
+  a.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => document.body.removeChild(a), 500);
+}
+
+// ═══════════════════════════════════════════
+// EXPORT CSV
+// ═══════════════════════════════════════════
+function exportCSV() {
+  if (!recs.length) { alert('لا توجد سجلات للتصدير'); return; }
+  const h = ['التاريخ','المريض','العمر','رقم الملف','الخدمة','وصف الحالة','العلاجات المستخدمة',
+    'عدد الملفات','الخدمات القادمة','الإجمالي','المدفوع','المتبقي','الزيارة القادمة','الوقت','ملاحظات'];
+  const rows = recs.map(r => [
+    (r.dt||'').replace('T',' '), r.name, r.age||'', r.fileno||'', r.svc||'',
+    r.desc||'', r.treat||'', (r.files||[]).length,
+    r.nextSvc||'', r.total||0, r.paid||0, r.rem||0,
+    r.nd||'', r.nt||'', r.notes||''
+  ]);
+  const csv = '\uFEFF' + [h,...rows].map(row=>row.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const date = new Date().toISOString().slice(0,10);
+  iosDL(`dental_${date}.csv`, 'text/csv;charset=utf-8', csv);
+}
+
+// ═══════════════════════════════════════════
+// EXPORT JSON (full with files)
+// ═══════════════════════════════════════════
+function exportJSON() {
+  if (!recs.length) { alert('لا توجد سجلات للتصدير'); return; }
+  const date = new Date().toISOString().slice(0,10);
+  iosDL(`dental_backup_${date}.json`, 'application/json', JSON.stringify(recs, null, 2));
+}
+
+// ═══════════════════════════════════════════
+// IMPORT JSON
+// ═══════════════════════════════════════════
+function importJSON(input) {
+  const f = input.files[0]; if (!f) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!Array.isArray(data)) throw new Error();
+      const st = document.getElementById('ioStatus');
+      st.style.display = 'block';
+
+      const merge = confirm(`تم العثور على ${data.length} سجل.\nموافق = إضافة للسجلات الحالية\nإلغاء = استبدال كامل`);
+      if (merge) {
+        const ids = new Set(recs.map(r=>r.id));
+        let added = 0;
+        data.forEach(r => { if(!ids.has(r.id)){ recs.push(r); added++; } });
+        st.textContent = `✅ تمت إضافة ${added} سجل جديد`;
+        st.style.cssText = 'display:block;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#4ADE80;border-radius:8px;padding:10px 14px;font-size:12px;margin-top:14px';
+      } else {
+        recs = data;
+        st.textContent = `✅ تم استيراد ${recs.length} سجل`;
+        st.style.cssText = 'display:block;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#4ADE80;border-radius:8px;padding:10px 14px;font-size:12px;margin-top:14px';
+      }
+      save(); render(); stats();
+    } catch(err) {
+      const st = document.getElementById('ioStatus');
+      st.style.display='block';
+      st.textContent='❌ ملف غير صالح';
+      st.style.cssText='display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#FCA5A5;border-radius:8px;padding:10px 14px;font-size:12px;margin-top:14px';
+    }
+  };
+  reader.readAsText(f);
+  input.value='';
+}
+
+// ═══════════════════════════════════════════
+// IO MODAL
+// ═══════════════════════════════════════════
+function openIO() {
+  document.getElementById('ioStatus').style.display='none';
+  openM('mIO');
+}
+
+function clearAll() {
+  if (!confirm('⚠️ حذف جميع السجلات نهائياً؟')) return;
+  if (!confirm('⚠️ تأكيد أخير — لا يمكن التراجع!')) return;
+  recs=[]; save(); render(); stats(); closeM('mIO');
+}
+
+// ═══════════════════════════════════════════
+// PRINT (separate window — works on iOS Safari)
+// ═══════════════════════════════════════════
+function doPrint() {
+  if (!recs.length) { alert('لا توجد سجلات للطباعة'); return; }
+
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  let list = recs;
+  if (q) list = recs.filter(r =>
+    (r.name||'').toLowerCase().includes(q)||
+    (r.fileno||'').toLowerCase().includes(q)||
+    (r.svc||'').toLowerCase().includes(q)
+  );
+  if (!list.length) { alert('لا توجد سجلات مطابقة'); return; }
+
+  const now = new Date();
+  const greg = now.toLocaleDateString('ar-SA',{year:'numeric',month:'long',day:'numeric'});
+  let hijri = '';
+  try { hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}).format(now); } catch(e){}
+
+  const tSum  = list.reduce((s,r)=>s+(parseFloat(r.total)||0),0);
+  const pSum  = list.reduce((s,r)=>s+(parseFloat(r.paid)||0),0);
+  const rmSum = list.reduce((s,r)=>s+(parseFloat(r.rem)||0),0);
+
+  const cards = list.map((r,i) => {
+    const rem = parseFloat(r.rem)||0;
+    const rc = rem<=0?'#15803d':'#dc2626';
+    const rl = rem<=0?'مسدّد ✓':rem.toFixed(2)+' ر.س';
+    const imgs = (r.files||[]).filter(f=>f.type&&f.type.startsWith('image/'));
+    const docs = (r.files||[]).filter(f=>f.type&&!f.type.startsWith('image/'));
+    return `
+    <div class="card">
+      <div class="card-hdr">
+        <span class="num">${i+1}</span>
+        <span class="pname">${r.name}</span>
+        <span class="fno">📁 ${r.fileno||'—'}</span>
+        <span class="pdt">${(r.dt||'—').replace('T',' ')}</span>
+      </div>
+      <div class="card-body">
+        <div class="row3">
+          <div class="f"><b>العمر</b>${r.age||'—'} سنة</div>
+          <div class="f"><b>الخدمة</b>${r.svc||'—'}</div>
+          <div class="f"><b>الخدمات القادمة</b>${r.nextSvc||'—'}</div>
+        </div>
+        ${r.desc?`<div class="desc"><b>وصف الحالة: </b>${r.desc}</div>`:''}
+        ${r.treat?`<div class="treat"><b>💊 العلاجات المستخدمة: </b>${r.treat}</div>`:''}
+        <div class="row4">
+          <div class="fi"><b>الإجمالي</b><span style="color:#9A7A30">${r.total||0} ر.س</span></div>
+          <div class="fi"><b>المدفوع</b><span style="color:#15803d">${r.paid||0} ر.س</span></div>
+          <div class="fi"><b>المتبقي</b><span style="color:${rc}">${rl}</span></div>
+          <div class="fi"><b>الزيارة القادمة</b><span>${r.nd||'—'}${r.nt?' '+r.nt:''}</span></div>
+        </div>
+        ${r.notes?`<div class="notes"><b>ملاحظات:</b> ${r.notes}</div>`:''}
+        ${imgs.length?`<div class="imgs">${imgs.map((f,ii)=>`<img src="${f.data}" onclick="openLB(${i},${ii})" title="انقر للتكبير">`).join('')}</div>`:''}
+        ${docs.length?`<div class="docs"><b>📎 الملفات المرفقة:</b><br>${docs.map((f,di)=>`<span class="doc-btns"><button class="doc-view" onclick="viewDoc(${i},${di})">👁 عرض</button><button class="doc-dl" onclick="dlDoc(${i},${di})">⬇ تحميل</button><span class="doc-name">${fIcon(f.type)} ${f.name}</span></span>`).join('')}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  const html = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تقرير المرضى – Dr. Abdulwahab Al-Areqi</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;color:#111;direction:rtl;font-size:12px;background:#fff}
+.pg-hdr{background:#0d1a2e;color:#fff;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #C9A84C;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.logo-row{display:flex;align-items:center;gap:10px}
+.logo-ico{width:38px;height:38px;background:linear-gradient(135deg,#9A7A30,#E8C96B);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pg-hdr h1{font-size:15px;font-weight:900;color:#E8C96B;font-family:'Cairo',sans-serif}
+.pg-hdr p{font-size:10px;color:#aaa;margin-top:1px}
+.pg-meta{text-align:left;font-size:11px;color:#ccc;line-height:1.8}
+.pg-meta b{color:#E8C96B}
+.summary{display:flex;border:1px solid #e5e7eb;border-radius:8px;margin:16px 28px;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.si{flex:1;padding:12px 14px;text-align:center;border-left:1px solid #e5e7eb}
+.si:last-child{border-left:none}
+.si label{display:block;font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.si .v{font-size:17px;font-weight:700;font-family:'Cairo',sans-serif}
+.v.gold{color:#9A7A30}.v.grn{color:#15803d}.v.red{color:#dc2626}
+.cards{padding:0 28px 28px}
+.card{border:1px solid #d1d5db;border-radius:8px;margin-bottom:14px;overflow:hidden;page-break-inside:avoid;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.card-hdr{background:#f9f5ed;border-bottom:1px solid #e8dfc4;padding:8px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.num{background:#9A7A30;color:#fff;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pname{font-size:13px;font-weight:800;flex:1}
+.fno{background:#1e3a5f;color:#93C5FD;padding:1px 8px;border-radius:20px;font-size:10px;font-weight:600;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pdt{font-size:10px;color:#666;margin-right:auto}
+.card-body{padding:12px 14px}
+.row3{display:flex;border:1px solid #e5e7eb;border-radius:6px;overflow:hidden;margin-bottom:8px}
+.f{flex:1;padding:7px 10px;border-left:1px solid #e5e7eb;font-size:11px}
+.f:last-child{border-left:none}
+.f b{display:block;font-size:9px;color:#888;margin-bottom:1px}
+.desc{background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:7px 10px;font-size:11px;color:#374151;margin-bottom:7px;line-height:1.5}
+.treat{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:7px 10px;font-size:11px;color:#14532d;margin-bottom:7px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.row4{display:flex;border:1px solid #e5e7eb;border-radius:6px;overflow:hidden;margin-bottom:7px}
+.fi{flex:1;padding:7px 10px;border-left:1px solid #e5e7eb;text-align:center}
+.fi:last-child{border-left:none}
+.fi b{display:block;font-size:9px;color:#888;margin-bottom:1px}
+.fi span{font-size:12px;font-weight:700;font-family:'Cairo',sans-serif}
+.notes{background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:7px 10px;font-size:11px;color:#78350f;margin-bottom:7px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.imgs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.imgs img{width:85px;height:85px;object-fit:cover;border-radius:6px;border:1px solid #d1d5db;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.imgs img:hover{transform:scale(1.06);box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.docs{margin-top:6px;font-size:11px}
+.doc-btns{display:inline-flex;align-items:center;gap:4px;background:#f8faff;border:1px solid #e0e7ff;border-radius:7px;padding:4px 8px;margin:3px 2px}
+.doc-name{font-size:11px;color:#374151;font-weight:600}
+.doc-view{background:#3B82F6;border:none;border-radius:5px;color:#fff;padding:3px 9px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit}
+.doc-view:hover{background:#2563EB}
+.doc-dl{background:#E5E7EB;border:none;border-radius:5px;color:#374151;padding:3px 9px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit}
+.doc-dl:hover{background:#D1D5DB}
+/* Lightbox overlay */
+#lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center;flex-direction:column}
+#lb.on{display:flex}
+#lb img{max-width:92vw;max-height:85vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.8);object-fit:contain}
+#lb-close{position:fixed;top:14px;right:14px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:#fff;font-size:22px;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1000;transition:background .15s}
+#lb-close:hover{background:rgba(239,68,68,.6)}
+#lb-name{color:rgba(255,255,255,.7);font-size:12px;margin-top:10px;max-width:80vw;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media print{#lb{display:none!important}.imgs img{cursor:default}.doc-view,.doc-dl{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.pg-ftr{border-top:2px solid #C9A84C;padding:10px 28px;display:flex;justify-content:space-between;font-size:10px;color:#888;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@media print{@page{margin:10mm 8mm;size:A4}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="pg-hdr">
+  <div class="logo-row">
+    <div class="logo-ico">🦷</div>
+    <div><h1>Dr. Abdulwahab Al-Areqi</h1><p>Dental Clinic</p></div>
+  </div>
+  <div class="pg-meta">
+    <div>📅 تاريخ الطباعة: <b>${greg}</b></div>
+    ${hijri?`<div>🗓 الموافق: <b>${hijri}</b></div>`:''}
+    <div>📋 عدد السجلات: <b>${list.length} سجل</b></div>
+  </div>
+</div>
+<div class="summary">
+  <div class="si"><label>إجمالي المرضى</label><div class="v">${list.length}</div></div>
+  <div class="si"><label>إجمالي المبالغ</label><div class="v gold">${tSum.toFixed(0)} ر.س</div></div>
+  <div class="si"><label>المحصّل</label><div class="v grn">${pSum.toFixed(0)} ر.س</div></div>
+  <div class="si"><label>المتبقي</label><div class="v red">${rmSum.toFixed(2)} ر.س</div></div>
+</div>
+<div class="cards">${cards}</div>
+<div class="pg-ftr">
+  <span>Dr. Abdulwahab Al-Areqi – Dental Clinic</span>
+  <span>${greg}</span>
+</div>
+<!-- Lightbox -->
+<div id="lb" onclick="if(event.target===this)closeLB()">
+  <button id="lb-close" onclick="closeLB()">✕</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-name"></div>
+</div>
+
+<script>
+  // Each doc's data is embedded as a JS array of objects
+  var docStore = ${JSON.stringify(list.map(r=>((r.files||[]).filter(f=>f.type&&!f.type.startsWith('image/')))))};
+  var imgStore = ${JSON.stringify(list.map(r=>((r.files||[]).filter(f=>f.type&&f.type.startsWith('image/')))))};
+
+  // ── helpers ──
+  function dataToBlob(dataURI) {
+    var parts = dataURI.split(',');
+    var mime = parts[0].match(/:(.*?);/)[1];
+    var raw = atob(parts[1]);
+    var arr = new Uint8Array(raw.length);
+    for (var i=0;i<raw.length;i++) arr[i] = raw.charCodeAt(i);
+    return new Blob([arr], {type: mime});
+  }
+
+  // ── image lightbox ──
+  function openLB(cardIdx, imgIdx) {
+    var f = imgStore[cardIdx][imgIdx];
+    if (!f) return;
+    document.getElementById('lb-img').src = f.data;
+    document.getElementById('lb-name').textContent = f.name;
+    document.getElementById('lb').classList.add('on');
+  }
+  function closeLB() {
+    document.getElementById('lb').classList.remove('on');
+    document.getElementById('lb-img').src = '';
+  }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLB(); });
+
+  // ── view file in new tab (blob URL) ──
+  function viewDoc(cardIdx, docIdx) {
+    var f = docStore[cardIdx][docIdx];
+    if (!f) return;
+    var blob = dataToBlob(f.data);
+    var url = URL.createObjectURL(blob);
+    var tab = window.open(url, '_blank');
+    // revoke after 60s to let the tab finish loading
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
+  }
+
+  // ── download file ──
+  function dlDoc(cardIdx, docIdx) {
+    var f = docStore[cardIdx][docIdx];
+    if (!f) return;
+    var blob = dataToBlob(f.data);
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = f.name; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  }
+
+  window.onload = function() {
+    // wait for images to load then print
+    var imgs = document.images;
+    var loaded = 0;
+    if (imgs.length === 0) { window.print(); return; }
+    for (var i=0;i<imgs.length;i++){
+      imgs[i].onload = imgs[i].onerror = function(){
+        loaded++;
+        if (loaded >= imgs.length) window.print();
+      };
+    }
+  };
+<\/script>
+</body>
+</html>`;
+
+  // Open in new window — this is the CORRECT approach for iOS Safari PWA print
+  const w = window.open('', '_blank');
+  if (w) {
+    w.document.write(html);
+    w.document.close();
+  } else {
+    // Fallback if popup blocked: download as HTML
+    iosDL('print_report.html','text/html', html);
+  }
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+load(); render(); stats();
+</script>
+</body>
+</html>
